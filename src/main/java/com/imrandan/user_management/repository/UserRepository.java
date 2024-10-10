@@ -1,4 +1,4 @@
-package com.imrandan.user_management;
+package com.imrandan.user_management.repository;
 
 import org.springframework.data.repository.CrudRepository;
 

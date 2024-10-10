@@ -1,4 +1,4 @@
-package com.imrandan.user_management;
+package com.imrandan.user_management.model;
 
 public class User {
     
