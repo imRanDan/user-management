@@ -1,12 +1,24 @@
 package com.imrandan.user_management.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     
     private String username;
     private String firstName;
     private String lastName;
     private String email;
     private String phoneNumber;
+
+    public User() {}
 
     // Constructor for storing user info
     public User(String username, String firstName, String lastName, String email, String phoneNumber) {
@@ -18,6 +30,14 @@ public class User {
     }
 
     //The Getters and The Setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getUsername() {
         return username;
     }
