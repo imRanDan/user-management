@@ -21,27 +21,31 @@ public class UserController {
     private UserRepository userRepository;
 
     // The Root Handle Path
+    @GetMapping("/")
+    public String home() {
+        return "Welcome tot he User Management Application!";
+    }
 
     // Creates a new user
-    @PostMapping
+    @PostMapping("/users")
     public User createUser(@RequestBody User user) {
         return userRepository.save(user);
     }
 
     // Gets all users
-    @GetMapping 
+    @GetMapping("/users")
     public Iterable<User> getAllUsers() {
         return userRepository.findAll();
     }
     
     // Get a user by their ID
-    @GetMapping("/{id}") 
+    @GetMapping("/users/{id}") 
     public Optional<User> getUserById(@PathVariable Long id) {
         return userRepository.findById(id);
     }
 
     // Updates user
-    @PutMapping("/{id}")
+    @PutMapping("/users/{id}")
     public User updateUser(@PathVariable Long id, @RequestBody User userDetails) {
         Optional<User> optionalUser = userRepository.findById(id);
         if (optionalUser.isPresent()) {
@@ -57,15 +61,9 @@ public class UserController {
     }
 
     // Delete a user
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/users/{id}")
     public void deleteUser(@PathVariable Long id) {
         userRepository.deleteById(id);
-    }
-
-    // Root handle path
-    @GetMapping("/")
-    public String home() {
-        return "welcome to the user management application!";
     }
   
 }
