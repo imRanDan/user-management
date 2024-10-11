@@ -23,7 +23,7 @@ public class UserController {
     // The Root Handle Path
     @GetMapping("/")
     public String home() {
-        return "Welcome tot he User Management Application!";
+        return "Welcome to the User Management Application!";
     }
 
     // Creates a new user
