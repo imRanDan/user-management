@@ -30,8 +30,26 @@ public class UserController {
 
     // Creates a new user
     @PostMapping("/users")
-    public User createUser(@RequestBody User user) {
-        return userRepository.save(user);
+    public ResponseEntity<String> createUser(@RequestBody User user) {
+        // Checks if a user with the same username or email already exists
+        Optional<User> existingUserByUsername = userRepository.findByUsername(user.getUsername());
+        Optional<User> existingUserByEmail = userRepository.findByEmail(user.getEmail());
+        Optional<User> existingUserByPhoneNumber = userRepository.findByPhoneNumber(user.getPhoneNumber());
+
+        if (existingUserByUsername.isPresent()) {
+            return new ResponseEntity<>("Username is already taken.", HttpStatus.CONFLICT);
+        }
+
+        if (existingUserByEmail.isPresent()) {
+            return new ResponseEntity<>("Email is already registered.", HttpStatus.CONFLICT);
+        }
+
+        if (existingUserByPhoneNumber.isPresent()) {
+            return new ResponseEntity<>("Phone number is already registered.", HttpStatus.CONFLICT);
+        }
+
+        userRepository.save(user);
+        return new ResponseEntity<>("User registered successfully.", HttpStatus.CREATED);
     }
 
     // Gets all users
