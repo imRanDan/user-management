@@ -31,6 +31,23 @@ public class UserController {
     // Creates a new user
     @PostMapping("/users")
     public ResponseEntity<String> createUser(@RequestBody User user) {
+        // Checks for empty fields for user creation
+        if (user.getUsername() == null || user.getUsername().trim().isEmpty()) {
+            return new ResponseEntity<>("Username cannot be empty", HttpStatus.BAD_REQUEST);
+        }
+        if (user.getFirstName() == null || user.getFirstName().trim().isEmpty()) {
+            return new ResponseEntity<>("First name cannot be empty", HttpStatus.BAD_REQUEST);
+        }
+        if (user.getLastName() == null || user.getLastName().trim().isEmpty()) {
+            return new ResponseEntity<>("Last name cannot be empty", HttpStatus.BAD_REQUEST);
+        }
+        if (user.getEmail() == null || user.getEmail().trim().isEmpty()) {
+            return new ResponseEntity<>("Email cannot be empty", HttpStatus.BAD_REQUEST);
+        }
+        if (user.getPhoneNumber() == null || user.getPhoneNumber().trim().isEmpty()) {
+            return new ResponseEntity<>("Phone number cannot be empty", HttpStatus.BAD_REQUEST);
+        }
+
         // Checks if a user with the same username or email already exists
         Optional<User> existingUserByUsername = userRepository.findByUsername(user.getUsername());
         Optional<User> existingUserByEmail = userRepository.findByEmail(user.getEmail());
