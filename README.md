@@ -35,6 +35,7 @@ The application will be available at `http://localhost:8080`.
 - `GET /users/{id}`: Retrieve a specific user by ID.
 - `PUT /users/{id}`: Update a user's information.
 - `DELETE /users/{id}`: Delete a user by ID.
+- make sure you replace the curly brackets with the actual number
 
 ## Persistence
 The application uses an H2 file-based database, ensuring that user data persists across application restarts.
