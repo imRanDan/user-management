@@ -70,8 +70,14 @@ public class UserController {
 
     // Delete a user
     @DeleteMapping("/users/{id}")
-    public void deleteUser(@PathVariable Long id) {
-        userRepository.deleteById(id);
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+        Optional<User> optionalUser = userRepository.findById(id);
+
+        if (optionalUser.isPresent()) {
+            userRepository.deleteById((id));
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT); // should return 204 No Content after successful deletion
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND); //returns 404 if user is not found
+        }
     }
-  
 }
